@@ -1,12 +1,42 @@
 Chapter 1: Introduction/Background
 
--Brief history of edge detection
+-Summary of Thesis
 
 
--How edge detection can be used
+-Segmentation
+How edge detection can be used
 
+-Detection
+How edge detection can be used
+How it is used in conjunction with color segmentation
 
--How it is used in conjunction with color segmentation
+-Recognition
 
 
 -Thesis problem statement
+
+(Chapter Starts Here)
+
+# Chapter 1
+
+## Summary
+
+## Background
+
+### Detection and Recognition
+
+#### Segmentation
+
+#### Detection
+
+#### Recognition
+
+### Convolution
+
+#### The Derivative of an Image
+
+#### Derivative Approximation
+
+## Thesis Problem Statement
+
+## Thesis Overview

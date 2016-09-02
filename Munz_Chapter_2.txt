@@ -1,5 +1,8 @@
 Chapter 2: Edge Detection Methods (Literature Review)
 
+-Brief history of edge detection
+
+
 -Prewitt
 
 
