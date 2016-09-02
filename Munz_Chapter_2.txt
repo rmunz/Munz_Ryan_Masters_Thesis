@@ -1,0 +1,18 @@
+Chapter 2: Edge Detection Methods (Literature Review)
+
+-Prewitt
+
+
+-Roberts
+
+
+-Fuzzy Logic?
+
+
+-Sobel
+
+
+-Canny* (Extra detail)
+Talk about the assumptions Canny makes
+Present this as the detection method we will use
+Why we will use it

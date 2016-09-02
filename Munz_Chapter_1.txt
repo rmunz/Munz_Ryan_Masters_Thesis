@@ -1,0 +1,12 @@
+Chapter 1: Introduction/Background
+
+-Brief history of edge detection
+
+
+-How edge detection can be used
+
+
+-How it is used in conjunction with color segmentation
+
+
+-Thesis problem statement
