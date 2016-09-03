@@ -1,21 +1,20 @@
-Chapter 2: Edge Detection Methods (Literature Review)
+# Chapter 2
 
--Brief history of edge detection
+## What is an Edge?
 
+## Edge Detectors
 
--Prewitt
+### Prewitt Detector
 
+### Roberts Detector
 
--Roberts
+### Sobel Detector
 
+### Canny Detector
 
--Fuzzy Logic?
+(Discuss the assumptions Canny makes and why they are good assumptions)
 
-
--Sobel
-
-
--Canny* (Extra detail)
-Talk about the assumptions Canny makes
-Present this as the detection method we will use
-Why we will use it
+## The "Standard" Detector
+(Discuss why the Canny algorithm is used instead of the others)
+(Present some improvements that were found)
+(Explain why we will use the "vanilla" version)
