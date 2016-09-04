@@ -2,11 +2,13 @@
 
 ## What is an Edge?
 
+Before we discuss different edge detection methods, we first need to define what an edge is. In image processing an edge is 
+
 ## Edge Detectors
 
-### Prewitt Detector
+### Roberts Cross
 
-### Roberts Detector
+### Prewitt Detector
 
 ### Sobel Detector
 
