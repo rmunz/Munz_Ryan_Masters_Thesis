@@ -1,18 +1,34 @@
-# Chapter 2
-
 ## What is an Edge?
-
 Before we discuss different edge detection methods, we first need to define what an edge is. In image processing an edge is 
 
 ## Edge Detectors
+In this section, different classical edge detectors will be introduced. The similarities and differences between them will be discussed.
 
-### Roberts Cross
+We will also discuss why the Canny Edge Detector has become the "standard" in image processing.
+
+There have been many edge detectors, but in this section, we will be focusing on 4 well known classical detectors. These detectors are Roberts, Prewitt, Sobel, and Canny. With the improvements in computing technology, the classical methods are becoming obsolete. The reason for this is more advanced methods can be used such as Neural Networks and Genetic Algorithms to create a more robust detector. However, most advance mwthods still refer to or even use some of the classical methods.
+
+The advanced methods are outside the scope of the paper and therefore will only be briefly introduced.
+
+### Roberts Cross Operator
+The Roberts Cross Operator, or Roberts Operator, was one of the first edge detection methods. Developed by Lawrence Roberts in 1963, 
+
+Since the convolution mask is diagonal, the Roberts operator is best at detecting edges at 45 degree angles.
+
+The 2x2 convolution masks that the operator uses are:
+
+**(TODO)**:Add convolution masks
+
+Due to the small size of the Roberts Operator (2x2), the operator is not robust against noise in the image. This is because when the operator is calculating the 
 
 ### Prewitt Detector
 
+
 ### Sobel Detector
 
+
 ### Canny Detector
+
 
 (Discuss the assumptions Canny makes and why they are good assumptions)
 
