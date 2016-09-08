@@ -6,7 +6,7 @@ In this section, different classical edge detectors will be introduced. The simi
 
 We will also discuss why the Canny Edge Detector has become the "standard" in image processing.
 
-There have been many edge detectors, but in this section, we will be focusing on 4 well known classical detectors. These detectors are Roberts, Prewitt, Sobel, and Canny. With the improvements in computing technology, the classical methods are becoming obsolete. The reason for this is more advanced methods can be used such as Neural Networks and Genetic Algorithms to create a more robust detector. However, most advance mwthods still refer to or even use some of the classical methods.
+There have been many edge detectors, but in this section, we will be focusing on 4 well known classical detectors. These detectors are Roberts, Prewitt, Sobel, and Canny. With the improvements in computing technology, the classical methods are becoming obsolete. The reason for this is more advanced methods can be used such as Neural Networks and Genetic Algorithms to create a more robust detector. However, most advance methods still refer to or even use some of the classical methods.
 
 The advanced methods are outside the scope of the paper and therefore will only be briefly introduced.
 
@@ -23,16 +23,43 @@ Due to the small size of the Roberts Operator (2x2), the operator is not robust 
 
 ### Prewitt Detector
 
+The 3x3 convolution masks that the operator uses are:
+
+**(TODO)**:Add convolution masks
 
 ### Sobel Detector
 
+The 3x3 convolution masks that the operator uses are:
+
+**(TODO)**:Add convolution masks
 
 ### Canny Detector
 
+The Canny Edge Detector was developed by John Canny in 1986 and is the most popular classical method in use today.
+
+**(TODO)**: Move the paragraph below to just before Roberts. Go in more detail and use figures for explanation.
+
+The first step in the Canny edge detector is to smooth the image to remove as much noise as possible. There is a trade off here that has to be considered. The more the image is smoothed, the better the Signal to Noise Ratio (SNR) becomes which improves edge detection. However, when an image is smoothed, the edges become wider; as in there are more pixels that represent an edge. These extra pixels cause localization problems, which means now that the edges are wider, the maximum intensity along the width of an edge decreases and therefore, the edge center determined by the Canny detector may not be the true center. To summarize, the more the image is smoothed, the better edges are detected, but may not be detected in the correct location compared to the original image. This means you want to smooth the image enough to increase SNR but not so much that that the detector has poor localization.
+
+To smooth an image, a Gaussian filter is used. The larger the filter window, the more noise is removed, but the image becomes more blurry which reduces localization. Typically a 3x3 or a 5x5 pixel window size is used, but it depends on the application. If a window size of 1x1 is used, the original image is unaffected. **(TODO: Explain why here)**
+
+The second step in the Canny detector is to find the Gradient intensities. This is typically done by convolving two masks with the image to find the gradients in the X and Y directions.
+
+The 3x3 convolution masks that the operator uses are:
+
+**(TODO)**:Add convolution masks
+
+Once the gradients in the X and Y directions are determined, the next stage is to find the magnitude and direction of the gradients. This is done using:
+
+**(TODO)**: Add equations for magnitude and angle
 
 (Discuss the assumptions Canny makes and why they are good assumptions)
 
 ## The "Standard" Detector
+
+### Assumptions
 (Discuss why the Canny algorithm is used instead of the others)
+
+### Improved Canny Detector
 (Present some improvements that were found)
 (Explain why we will use the "vanilla" version)
