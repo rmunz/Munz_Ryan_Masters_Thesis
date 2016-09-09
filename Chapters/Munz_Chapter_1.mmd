@@ -3,11 +3,19 @@
 (TODO: Complete Section Last)
 
 ## Background
+Before we begin discussing edge detection and the many different methods out there, we will start with what the overall procedure is to process images and extract the information we need from these images. We will also discuss fourier transforms and convolution which are some of the math concepts used in edge detection.
+
+**(TODO)**: Rewrite this section and expand
 
 ### Detection and Recognition
+This document focuses on edge detection in the context of Traffic Road Sign Detection and Recognition. To understand our edge detection requirements, we first need the larger picture of what we want our final result to be. In Traffic Road Sign Detection and Recognition, the input is typically a RGB video stream where the camera is pointed forward on a vehicle and records what is in front of the car. The output are labels of what Traffic signs the camera "sees". For many years the steps in between the input and output were Detection and Recognition. However, more recent papers such as **(TODO: Add reference)** have broken up the detection step into two steps. These steps are Segementation and Detection. The rest of this section will go more into detatil about what happens in each step and at the end, we should have an understanding of the larger picture.
 
 #### Segmentation
+This step has always exsisted, but used to be grouped in with detection. Recent researchers have seperated Segementation into a seperate step. 
 
+**(TODO)**: fix segemntation intro and add examples/references
+
+There are two main approaches to acheiveing segmentation; the first abroach is edge or shape segmentation and the second approach is color segementation. 
 (How edge detection can be used)
 
 #### Detection
@@ -16,6 +24,12 @@
 (How it is used in conjunction with color segmentation)
 
 #### Recognition
+Recognition is the last step before we get the final result needed from the image. At this point, the 
+
+**(TODO)**: Add examples of recognition and their references
+
+
+### Fourier Transforms
 
 ### Convolution
 
