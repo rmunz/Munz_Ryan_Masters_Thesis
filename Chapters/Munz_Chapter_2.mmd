@@ -53,6 +53,18 @@ Once the gradients in the X and Y directions are determined, the next stage is t
 
 **(TODO)**: Add equations for magnitude and angle
 
+The third step is using non-maximum suppression to determine the true location of the edge. This is done by using the gradient direction for a given pixel and comparing the gradient magnitudes. If the current pixel has a larger intesity than the two neighboring pixels, then the pixel remians. If the current pixel's intensity is less than either neighbor, then the pixel in removed or suppressed. The final results will be a single continuous edge tha is one pixel wide. This represents the "True" location of the edge.
+
+**(TODO)**: Add figures for non-maximum suppression and elaborate more on how it works by including figures.
+
+The final step the Canny detector takes is what makes it different from all other classical detectors and also why the Canny detector is so popular. The last step is thresholding use hysteresis. This means, that unlike other classical methods, instead of using a single threshold for edge detection, Canny uses two thresholds instead. There is a higher and lower threshold and the higher to lower threshold ration is typically 2:1 or 3:1. Meaning the higher threshold is either twice or three times as large as the lower threshold. Again though, this all depends on the specifc application; there is no one size fits all thresholding scheme.
+
+The way hysteresis works is that the remaining edge pixel intensities are examined. If the pixel intesity is greater than the higher threshold, then the pixel is put into the final image. If the pixel intesity is less than the lower threshold, then the pixel is removed. However, if a pixel is greater than the lower threshold, but less than the higher threshold, then the pixel is marked as a "maybe" pixel. Once all pixels have been label, the "maybe" pixels are the reexamined. If these pixels are connected to a strong edge, the pixels that are above the higher threshold, then they are added to the final image. If they are not conncected to a strong edge, then they are also removed.
+
+This allows for some leeway in the threshold scheme to allow for edges that may be occluded by a shadow or is a different color to show up in the final image. 
+
+**(TODO)**: Add more about Hysteresis as well as some images.
+
 (Discuss the assumptions Canny makes and why they are good assumptions)
 
 ## The "Standard" Detector
