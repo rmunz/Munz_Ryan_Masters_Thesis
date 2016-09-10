@@ -1,5 +1,61 @@
 ## What is an Edge?
-Before we discuss different edge detection methods, we first need to define what an edge is. In image processing an edge is a place of rapid change in the intensity of the image.
+People say "A picture is worth a thousand words" and this is true. There is a lot of information cantained in even the most simplest images. However, not all of the information in an image is required. If we keep just the edges or the outlines of object, we as humans can still determine what the outlines represent. This is the approach many researchers have taken with regards to segmentation and detection **(TODO): Add reference**. The orginal image is reduced down to a black and white image where the white pixels represent the detected edges.
+
+Before we discuss different edge detection methods, we first need to define what an edge is. In image processing an edge is a place of rapid change in the intensity of the image. An example of can be seen in Figure <!--\ref{fig:edge1}-->. The figure is a simplified image containing a black rectange against a white background. 
+
+<!--
+	\begin{figure}[h]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Edge_with_Scan_Line.png}
+    	\caption{The image above is a simplified example of edges. The red line represents the scan line which crosses over two edges.}
+    	\label{fig:edge1}
+	\end{figure}
+-->
+
+<!--
+	\begin{figure}[h]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Intensity.png}
+    	\caption{This figure plots the intensities of the pixels along the scan line going from left to right.}
+    	\label{fig:edge2}
+	\end{figure}
+-->
+
+<!--
+	\begin{figure}[h]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Der_Intensity.png}
+    	\caption{This figure plots the derivative of the previous intensity plot.}
+    	\label{fig:edge3}
+	\end{figure}
+-->
+
+<!--
+	\begin{figure}[h]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Edge_Noise.png}
+    	\caption{The image above is a simplified example of edges. The red line represents the scan line which crosses over two edges.}
+    	\label{fig:edge4}
+	\end{figure}
+-->
+
+<!--
+	\begin{figure}[h]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Intensity_Noise.png}
+    	\caption{This figure plots the intensities of the pixels along the scan line going from left to right.}
+    	\label{fig:edge5}
+	\end{figure}
+-->
+
+<!--
+	\begin{figure}[h]
+    	\centering
+    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Der_Intensity_Noise.png}
+    	\caption{This figure plots the derivative of the previous intensity plot.}
+    	\label{fig:edge6}
+	\end{figure}
+-->
 
 ## Edge Detectors
 In this section, different classical edge detectors will be introduced. The similarities and differences between them will be discussed.
