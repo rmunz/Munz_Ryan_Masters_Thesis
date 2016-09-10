@@ -1,61 +1,75 @@
 ## What is an Edge?
-People say "A picture is worth a thousand words" and this is true. There is a lot of information cantained in even the most simplest images. However, not all of the information in an image is required. If we keep just the edges or the outlines of object, we as humans can still determine what the outlines represent. This is the approach many researchers have taken with regards to segmentation and detection **(TODO): Add reference**. The orginal image is reduced down to a black and white image where the white pixels represent the detected edges.
+People say "A picture is worth a thousand words" and this is true. There is a lot of information contained in even the most simplest images. However, not all of the information in an image is required. If we keep just the edges or the outlines of object, we as humans can still determine what the outlines represent. This is the approach many researchers have taken with regards to segmentation and detection **(TODO): Add reference**. The original image is reduced down to a black and white image where the white pixels represent the detected edges.
 
-Before we discuss different edge detection methods, we first need to define what an edge is. In image processing an edge is a place of rapid change in the intensity of the image. An example of can be seen in Figure <!--\ref{fig:edge1}-->. The figure is a simplified image containing a black rectange against a white background. 
+Before we discuss different edge detection methods, we first need to define what an edge is. In image processing an edge is a place of rapid change in the intensity of the image. An example of some edges can be seen in Figure <!--\ref{fig:edge1}-->. The figure is a simplified image containing a black rectangle against a white background. The red line in Figure <!--\ref{fig:edge1}--> is the scan line which represents the pixels in the image that we will take a closer look at.
 
 <!--
 	\begin{figure}[h]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Edge_with_Scan_Line.png}
+    	\includegraphics[width=0.35\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Edge_with_Scan_Line.png}
     	\caption{The image above is a simplified example of edges. The red line represents the scan line which crosses over two edges.}
     	\label{fig:edge1}
 	\end{figure}
 -->
 
+If we took every pixel along the red scan line and plotted the intensities of the pixels, we would get the intensity plot shown in Figure <!--\ref{fig:edge2}-->. Recall that the in Gray-scale, the intensity of a white pixel is 255 and the intensity of a black pixel is 0. Now imagine we are moving across the scan line from left to right. We start on white pixels in Figure <!--\ref{fig:edge1}--> or an intensity of 255 in Figure <!--\ref{fig:edge2}-->. As we move right, we have more pixel intensities of 255 (white) until we reach the left side of the rectangle. A this point the intesities drop rapidy to 0. This is because there are only a few transitional pixels, as in there are just a few pixels of intensities between 0 and 255. Due to this, we get an almost instantaneous change from 255 to 0. If we were to have more pixels of intensities between 0 and 255, there would be a more smooth transition.
+
 <!--
 	\begin{figure}[h]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Intensity.png}
+    	\includegraphics[width=0.35\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Intensity.png}
     	\caption{This figure plots the intensities of the pixels along the scan line going from left to right.}
     	\label{fig:edge2}
 	\end{figure}
 -->
 
+As we continue right, we come across another rapid change in pixel intesity, but this time we go from 0 to 255. This is how we can visualize the graph in Figure <!--\ref{fig:edge2}-->. The edges occur at these rapid changes, but how do we get the computer to pick these pixels as edges? We humans see the change and can instantly point out where the edges are. But it is harder to get a computer to see these changes. We could create an algorithm to look for these changes and estimate the pixel location. However, we can also take the derivative of the intensity plot. The drivative of the plot in Figure <!--\ref{fig:edge2}--> is shown in Figure <!--\ref{fig:edge3}-->.
+
 <!--
 	\begin{figure}[h]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Der_Intensity.png}
+    	\includegraphics[width=0.35\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Der_Intensity.png}
     	\caption{This figure plots the derivative of the previous intensity plot.}
     	\label{fig:edge3}
 	\end{figure}
 -->
 
+When the derivative of the intensity image is taken, the result is peaks forming at the rapid intensity changes. In Figure <!--\ref{fig:edge3}-->, we have two peaks. The first peak is negative because we have a transition from 255 to 0, which gives us a negative slope or a negative peak. The second peak is positive becasue the second transition is from 0 to 255. Now we have a plot with two clear peaks. It would be a simple matter of looking for the local maximum and that would give us a good estimation of the edge location. 
+
+A problem arises with taking the derivative. This problem is that most images are not "clean". As in the images have some form of noise. Consider our edge example from before, but now let us add some Gaussian noise. The noisey image is shown in Figure <!--\ref{fig:edge4}-->.
+
 <!--
 	\begin{figure}[h]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Edge_Noise.png}
+    	\includegraphics[width=0.35\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Edge_Noise.png}
     	\caption{The image above is a simplified example of edges. The red line represents the scan line which crosses over two edges.}
     	\label{fig:edge4}
 	\end{figure}
 -->
 
+The added noise causes many rapid changes in pixel intensity. This is show in Figure <!--\ref{fig:edge5}-->. As we move from left to right along the scan line, just as we did before, our intensity plot now has high frequency noise. While we as humans can still see where the edges occur, a computer has a difficult time extracting the edge locations. Think back to earlier in this section when we mentioned an algorith that looks for intensity changes and marks them as edges. If we were to perform that algorithm on the noisy intensity plot, how do we differentiate the rapid changes due to the noise from the changes caused by an edge? 
+
 <!--
 	\begin{figure}[h]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Intensity_Noise.png}
+    	\includegraphics[width=0.35\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Intensity_Noise.png}
     	\caption{This figure plots the intensities of the pixels along the scan line going from left to right.}
     	\label{fig:edge5}
 	\end{figure}
 -->
 
+We could threshold the intensity changes so that we only look for large intesnsity changes. While this would most likely work in our example because our intensities change from 255 to 0 and 0 to 255; what happens if the edge is not as sharp? As in, what if the intesity change is only from 50 to 150, or even smaller. This small change in intensity will be very hard to segment out using thresholds, especially if there is a large amount of noise. However, taking the derivative of a noisy intensity plot also has the same problems. The dervivative of our noisy intensity plot is shown in Figure <!--\ref{fig:edge6}-->.
+
 <!--
 	\begin{figure}[h]
     	\centering
-    	\includegraphics[width=0.5\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Der_Intensity_Noise.png}
+    	\includegraphics[width=0.35\textwidth]{/home/ryan/Documents/Thesis/scriptorium/papers/Munz_Ryan_Masters_Thesis/Thesis_Images/What_is_an_Edge/Der_Intensity_Noise.png}
     	\caption{This figure plots the derivative of the previous intensity plot.}
     	\label{fig:edge6}
 	\end{figure}
 -->
+
+In Figure <!--\ref{fig:edge3}-->, the peaks representing edges were well defined and easy to find. However, the peaks in Figure <!--\ref{fig:edge6}--> are much harder to spot. This is becasue the dervivative is a multiplicative operation and therefore multiplies the magnitude of the noise. How do we solve the nosie prolem? In the next section, we will talk about using a Gaussian low-pass filter to smooth the image and remove some of the noise.
 
 ## Edge Detectors
 In this section, different classical edge detectors will be introduced. The similarities and differences between them will be discussed.
@@ -109,13 +123,13 @@ Once the gradients in the X and Y directions are determined, the next stage is t
 
 **(TODO)**: Add equations for magnitude and angle
 
-The third step is using non-maximum suppression to determine the true location of the edge. This is done by using the gradient direction for a given pixel and comparing the gradient magnitudes. If the current pixel has a larger intesity than the two neighboring pixels, then the pixel remians. If the current pixel's intensity is less than either neighbor, then the pixel in removed or suppressed. The final results will be a single continuous edge tha is one pixel wide. This represents the "True" location of the edge.
+The third step is using non-maximum suppression to determine the true location of the edge. This is done by using the gradient direction for a given pixel and comparing the gradient magnitudes. If the current pixel has a larger intensity than the two neighboring pixels, then the pixel remains. If the current pixel's intensity is less than either neighbor, then the pixel in removed or suppressed. The final results will be a single continuous edge tha is one pixel wide. This represents the "True" location of the edge.
 
 **(TODO)**: Add figures for non-maximum suppression and elaborate more on how it works by including figures.
 
-The final step the Canny detector takes is what makes it different from all other classical detectors and also why the Canny detector is so popular. The last step is thresholding use hysteresis. This means, that unlike other classical methods, instead of using a single threshold for edge detection, Canny uses two thresholds instead. There is a higher and lower threshold and the higher to lower threshold ration is typically 2:1 or 3:1. Meaning the higher threshold is either twice or three times as large as the lower threshold. Again though, this all depends on the specifc application; there is no one size fits all thresholding scheme.
+The final step the Canny detector takes is what makes it different from all other classical detectors and also why the Canny detector is so popular. The last step is thresholding use hysteresis. This means, that unlike other classical methods, instead of using a single threshold for edge detection, Canny uses two thresholds instead. There is a higher and lower threshold and the higher to lower threshold ration is typically 2:1 or 3:1. Meaning the higher threshold is either twice or three times as large as the lower threshold. Again though, this all depends on the specific application; there is no one size fits all thresholding scheme.
 
-The way hysteresis works is that the remaining edge pixel intensities are examined. If the pixel intesity is greater than the higher threshold, then the pixel is put into the final image. If the pixel intesity is less than the lower threshold, then the pixel is removed. However, if a pixel is greater than the lower threshold, but less than the higher threshold, then the pixel is marked as a "maybe" pixel. Once all pixels have been label, the "maybe" pixels are the reexamined. If these pixels are connected to a strong edge, the pixels that are above the higher threshold, then they are added to the final image. If they are not conncected to a strong edge, then they are also removed.
+The way hysteresis works is that the remaining edge pixel intensities are examined. If the pixel intensity is greater than the higher threshold, then the pixel is put into the final image. If the pixel intensity is less than the lower threshold, then the pixel is removed. However, if a pixel is greater than the lower threshold, but less than the higher threshold, then the pixel is marked as a "maybe" pixel. Once all pixels have been label, the "maybe" pixels are the reexamined. If these pixels are connected to a strong edge, the pixels that are above the higher threshold, then they are added to the final image. If they are not connected to a strong edge, then they are also removed.
 
 This allows for some leeway in the threshold scheme to allow for edges that may be occluded by a shadow or is a different color to show up in the final image. 
 
