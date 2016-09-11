@@ -69,7 +69,23 @@ We could threshold the intensity changes so that we only look for large intesnsi
 	\end{figure}
 -->
 
-In Figure <!--\ref{fig:edge3}-->, the peaks representing edges were well defined and easy to find. However, the peaks in Figure <!--\ref{fig:edge6}--> are much harder to spot. This is becasue the dervivative is a multiplicative operation and therefore multiplies the magnitude of the noise. How do we solve the nosie prolem? In the next section, we will talk about using a Gaussian low-pass filter to smooth the image and remove some of the noise.
+In Figure <!--\ref{fig:edge3}-->, the peaks representing edges were well defined and easy to find. However, the peaks in Figure <!--\ref{fig:edge6}--> are much harder to spot. This is because the dervivative is a multiplicative operation and therefore amplifies the magnitude of the noise. How do we solve the noise prolem? In the next section, we will talk about using a Gaussian low-pass filter to smooth the image and remove some of the noise.
+
+## Nosie Reduction in Images
+
+**(TODO): Go in more detail and use figures for explanation.**
+
+At the end of the previous section, the problem of noise was introduced. Noise in an image can make taking the derivative of the pixel intensities unproductive. The reason why we want to reduce the noise in an image is that most classical edge detection methods find the magnitude of each pixel intensity by taking the dervivative of an image in the X and Y directions. This can be done either with Fourier Transforms or Convolution, which were covered in the Introduction of this paper. The intensity magnitudes are then used to determine where the edges are by using different methods specific to the edge detector which will be discussed in the next section. So how do we reduce noise?
+
+The most common way to reduce noise is to smooth the image using a Gaussian low-pass filter. There is a trade off here that has to be considered. The more the image is smoothed, the better the Signal to Noise Ratio (SNR) becomes which improves edge detection. However, when an image is smoothed, the edges become wider **(TODO): Image reference to smoothed image**; as in there are more pixels that represent an edge. These extra pixels cause localization problems, which means now that the edges are wider, the maximum intensity along the width of an edge decreases and therefore, the edge center determined by the Canny detector may not be the true center. To summarize, the more the image is smoothed, the better edges are detected, but may not be detected in the correct location compared to the original image. This means you want to smooth the image enough to increase SNR but not so much that that the detector has poor localization.
+
+**(TODO): Add new edge image that shows a single edge with a wider transition area**
+
+**(TODO): Add image of the previous edge with noise**
+
+**(TODO): Add image of edge smoothed too much**
+
+To smooth an image, a Gaussian filter is used. The larger the filter window, the more noise is removed, but the image becomes more blurry which reduces localization. Typically a 3x3 or a 5x5 pixel window size is used, but it depends on the application. If a window size of 1x1 is used, the original image is unaffected. **(TODO: Explain why here)**
 
 ## Edge Detectors
 In this section, different classical edge detectors will be introduced. The similarities and differences between them will be discussed.
@@ -106,12 +122,6 @@ The 3x3 convolution masks that the operator uses are:
 ### Canny Detector
 
 The Canny Edge Detector was developed by John Canny in 1986 and is the most popular classical method in use today.
-
-**(TODO)**: Move the paragraph below to just before Roberts. Go in more detail and use figures for explanation.
-
-The first step in the Canny edge detector is to smooth the image to remove as much noise as possible. There is a trade off here that has to be considered. The more the image is smoothed, the better the Signal to Noise Ratio (SNR) becomes which improves edge detection. However, when an image is smoothed, the edges become wider; as in there are more pixels that represent an edge. These extra pixels cause localization problems, which means now that the edges are wider, the maximum intensity along the width of an edge decreases and therefore, the edge center determined by the Canny detector may not be the true center. To summarize, the more the image is smoothed, the better edges are detected, but may not be detected in the correct location compared to the original image. This means you want to smooth the image enough to increase SNR but not so much that that the detector has poor localization.
-
-To smooth an image, a Gaussian filter is used. The larger the filter window, the more noise is removed, but the image becomes more blurry which reduces localization. Typically a 3x3 or a 5x5 pixel window size is used, but it depends on the application. If a window size of 1x1 is used, the original image is unaffected. **(TODO: Explain why here)**
 
 The second step in the Canny detector is to find the Gradient intensities. This is typically done by convolving two masks with the image to find the gradients in the X and Y directions.
 
