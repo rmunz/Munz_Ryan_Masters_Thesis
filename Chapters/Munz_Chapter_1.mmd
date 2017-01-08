@@ -1,56 +1,6 @@
-## Thesis Summary
+## Introduction
 
-(TODO: Complete Section Last)
+### Background
+	Why do we care?
 
-## Background
-Before we begin discussing edge detection and the many different methods out there, we will start with what the overall procedure is to process images and extract the information we need from these images. We will also discuss fourier transforms and convolution which are some of the math concepts used in edge detection.
-
-**(TODO)**: Rewrite this section and expand
-
-### Detection and Recognition
-This document focuses on edge detection in the context of Traffic Road Sign Detection and Recognition. To understand our edge detection requirements, we first need the larger picture of what we want our final result to be. In Traffic Road Sign Detection and Recognition, the input is typically a RGB video stream where the camera is pointed forward on a vehicle and records what is in front of the car. The output are labels of what Traffic signs the camera "sees". For many years the steps in between the input and output were Detection and Recognition. However, more recent papers such as **(TODO: Add reference)** have broken up the detection step into two steps. These steps are Segementation and Detection. The rest of this section will go more into detatil about what happens in each step and at the end, we should have an understanding of the larger picture.
-
-#### Segmentation
-This step has always exsisted, but used to be grouped in with detection. Recent researchers have seperated Segementation into a seperate step. 
-
-**(TODO)**: fix segemntation intro and add examples/references
-
-There are two main approaches to acheiveing segmentation; the first abroach is edge or shape segmentation and the second approach is color segementation. 
-(How edge detection can be used)
-
-#### Detection
-
-(How edge detection can be used)
-(How it is used in conjunction with color segmentation)
-
-#### Recognition
-Recognition is the last step before we get the final result needed from the image. At this point, the 
-
-**(TODO)**: Add examples of recognition and their references
-
-
-### Fourier Transforms
-
-#### 1-D Fourier Transforms
-
-#### 2-D Fourier Transforms
-
-### Convolution
-
-#### The Derivative of an Image
-
-#### Derivative Approximation
-
-## Thesis Problem Statement
-
-## Thesis Overview
-
-**(TODO)**: Review this part after summary is written and make any needed changes
-
-Chapter 2 discusses Prewitt, Roberts, Fuzzy Logic, Sobel, and Canny edge detectio methods and their similarities and differences. The chapter also discusses the reasons why Canny is the "standard" in computer vision for edge detection and will review the assumptions made by John Canny for the Canny algorithm.
-
-Chapter 3 intorduces the concept of optical flow in image processing and how optical flow can be combined with Canny edge detection to increase the amount of information obtained from a finite number of frames compared to that of information obtain by Canny edge detection alone. Reviewing the assumption made by Canny, the chapter will discuss a "Tuned" Canny algorithm specific to detecting road signs. Finally, the chapter presents the tests that will be performed to determined if more information can be gatheres.
-
-Chapter 4 presents the results from using the LISA database where the images were taken as the vehicle traveled along the road. The results of the proof of concept will also be presented where the concept examines optical flow in multiple directions other than along the road.
-
-Chapter 5 summarizes the findings from the tests and discusses the conclusions that can be made from the data. Future work is presented after the conclusion.
+### Overview
