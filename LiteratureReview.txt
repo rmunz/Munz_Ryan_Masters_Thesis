@@ -1,0 +1,233 @@
+﻿Text Localization for Unmanned Ground Vehicles
+By Allan Kirchhoff
+Summary:
+TODO
+
+
+Citation:
+[1] A. R. Kirchhoff, “Text Localization for Unmanned Ground Vehicles.” Virginia Tech, 16-Oct-2014.
+
+
+________________
+
+
+Traffic Road Sign Detection and Recognition for Automotive Vehicles
+By: Md. Safaet Hossain and Zakir Hyder
+Summary:
+
+
+The paper written by Md. Safaet Hossain and Zakir Hyder reviewed current work done in the field of road sign detection and recognition for autonomous vehicles. The authors first discussed the different types of road signs that they would be looking at. There are four main types of signs, warning, prohibition, obligation, and informative. The reason why we want to be able to detect and recognize road signs in real time is that they are designed to be easily recognizable by humans and give us important information as we drive, so why should autonomous vehicles not use the signs for the same reason? However, there are three main difficulties in the road sign detection problem. The first problem is that road signs vary a lot and have different textures. Second, are unwanted external additions such as dirt, snow or ice.
+
+
+After the author's’ introduction, they went into current literature on the Road Sign Recognition (RSR) problem. The paper presented Fast grayscale road sign model matching and recognition, Detection by Adaboost, Road Traffic Sign Detection and Classification, and Color Thresholding. For each section, they explained how each method works at detecting road signs. The authors then performed some experiments and presented their results. Their results were not labeled well and could have provided more examples or information. The next step was the system architecture used for their specific setup. The steps of the architecture are:
+* Take image
+* Preprocess it
+* Use color thresholding
+* Use object localization
+* Verify that it is a road sign
+* Reduce image to sign area
+* Match sign to database
+They presented the results from their experiments and found that more light available, the better the system performed. At noon the percent correct was 90% whereas the percent correct at night was 50%. Overall, this paper was a good introduction into some different methods for detecting road signs and gave me other references to look at. However I do not think the authors put much time into this. It feels to me it was a class project that the author’s were told to write a paper on. This is because of the lack of details in experiments and the poor formatting of images.
+
+
+[2] Hossain, Md Safaet, and Zakir Hyder. "Traffic Road Sign Detection and Recognition for Automotive Vehicles." International Journal of Computer Applications 120.24 (2015)ProQuest. Web. 25 Jan. 2016.
+
+
+
+
+________________
+
+
+Traffic Road Sign Detection and Classification 
+By: Mehdi Fartaj and Sedigheh Ghofrani
+Summary:
+
+
+This paper by authors Mehdi Fartaj and Sedigheh Ghofrani introduces some interesting methods for traffic sign detection and recognition, specifically for real time applications in intelligent vehicles. The authors start with explaining that traffic provide valuable information to the driver, so why should an intelligent vehicle also not use these signs. The problems with these detection systems occur when there is low lighting, weather, rotation, scaling, and partial or complete occlusions. The first step in traffic sign detection is to extract the region of interest in the image using H and S from the HSI color space. The next step is to classify each ROI to determine if the pixels inside the region is indeed a sign. The final step is to take the ROIs that are sign and use recognition algorithms to determine what sign is present.
+
+
+When HSI is used for color segmentation, the regions segmented out will not all be signs. The authors used Red and Blue segmentation to find signs since most of the common signs included red, blue, or both. The authors ignored intensity since it contains no information on the color of the sign, but could one use intensity for detection at night since signs are designed to be highly reflective. However, segmenting on such a common color will include items such as people’s clothes, cars, or paintings. To remove these items with minimal computation, the authors also looked at the features of each region extracted. The features examined were area, aspect ration, mass center, orientation, and active pixels. 
+
+
+When classifying the road signs that were segmented out, the authors focused on general traffic signs; therefore, they only looked for circle, triangles, and squares in the image. This means their method would not be able to classify stop signs and other specialty signs. The authors also discussed some problems encountered during classification. The first problem is projection distortions which can cause circles to look like ellipses and for squares to look like rectangles. Depending on the assumptions made and methods used, this distortion can throw off the accuracy of the method. Another problem is scaling, as the camera approaches the sign, the scale of the sign will increase. Rotation is also a problem because a square at a 45 degree angle now looks like a diamond which could represent a completely different sign such as the construction signs in the USA. Occlusions and Camera noise can change the shape of the sign that the camera detects and therefore misclassify the sign.
+
+
+The methods presented for classification were Distance to Border (DTB) Feature Vectors, FFT Sample of Signature, Directional Vector, and Region Growth Circle Classifier. DTB Feature Vectors is four vectors that relate the contour of the blob to the blob’s bounding box. The four vectors are formed for each shape (triangle, circle, and square) and then the variance value or hamming distance is calculated. The variance for circle is the largest, followed by triangle, and then square. DTB is robust to translation, scaling, rotation and occlusions which makes this method a reliable one.
+
+
+FFT Sample of Signature is the next method presented. This method is used for classification by creating a signature of the mass center to boundary of segmented object by varying angles. The 32 point DFT of each signature is computed and nearest neighbor using euclidian distance is used for classification. Only the first part of the DFT is significant because the rest of the DFT is influenced by noise; therefore, we only use 8 coefficients of the DFT for classification. The method is invariant to rotation and scaling but is also more computationally extensive than DTB. The extra cost comes from using nonlinear equations.
+
+
+The third method presented, which I find most interesting, is Directional Vectors or chain codes. What makes this method enticing is the simplicity and low storage requirement needed. The first step is to use an edge detection algorithm (in this paper, they used canny) to find all the edge pixels in the ROI. The edge pixels are then converted to a directional vector called a code matrix. For better resolution, of angles, the nearest 8 neighbors can be used, but the authors only used 4 because circles, squares, and triangles only have so many different angles. What is nice about this process, is the accuracy is not dependent on where along the edge the algorithm starts. After the code matrix is generated, the average value is calculated. This is done by assigning an 8 to each horizontal and vertical edge pixel and a 2 to each diagonal pixel. If the average is close to or equal to 8, then the shape is a square since all pixels are horizontal or vertical. The authors created 3 normalized equations for each shape in order to use this method for classification. The equations are 4,5, and 6 in the paper.
+
+
+The last method presented by the authors is Region Growth Circle Classifier. This method is specific to detecting circular shapes. The method works by creating a small circle of about 2 pixels at the center of the ROI. The radius is then increased by 1 pixel and the correlation between the circle and the detected sign is calculated. If the sign is truly a circles, then at a given stage, the correlation between the two will be very high. This method was not really used as the other methods presented could classify circles as well as the other shapes.
+
+
+The most efficient algorithm was found to be the code matrix which typically ran in 350 msec where DTB and FFT ran in 1200 msec and 850 msec respectively. The accuracy of code matrix, DTB, and FFT were 89.3, 87.6, and 85 percent respectively. The authors concluded that the code matrix method achieved the highest accuracy using a simply and cost efficient algorithm that provided the possibility of online image processing.
+
+
+[3] Fartaj, Mehdi, and Sedigheh Ghofrani. "Traffic Road Sign Detection and Classification." Majlesi Journal of Electrical Engineering 6.4 (2012): 54-62. ProQuest. Web. 25 Jan. 2016
+
+
+
+
+
+
+
+
+
+
+________________
+
+
+Detection, Tracking and Classification of Road Signs in Adverse Conditions
+By: George Siogkas and Evangelos Dermatas
+Summary:
+
+
+The author presented some possible methods to use for real time RSD and RSC. The introduction section describes the fact that signs can be categorized as danger proclamation, traffic regulation, and information signs. All sign are used to provide the driver valuable information about the road ahead so that the driver can change speed or know when his/her turn is coming up. In order for traffic signs to be useful, they are designed to be easily detected by humans by using high contrast colors and symetric shapes to help the sign stand out from the natural background. The benefits of having a robust system that can perform real time RSD and RSC is that immediately, the system could be used as a driver's aid to automatically adjust car settings to prepare for the road ahead. This would allow the driver to focus more on navigation rather than controlling the car constantly. The other benefit would be to use the system in fully autonomous vehicles.
+
+
+In order to develop a robust system, many factors have to be considered. First, a decision needs to be made on what color space to use and then based on color space, how should the image be segmented to detect the traffic signs. Other things to consider is if tracking is to be used and if so, what algorithm. What about genetic algorithms, neural networks, or even bayesian modeling. The system the authors chose was a combination of the L*a*b color space using symmetry detection, Otsu thresholding, and sign tracking in multiple frames. The L*a*b color space is interesting because it breaks down an image into red-green, a, and yellow-blue, b, channels. The L represents Luminosity which makes this color space more immune to color changes. Alos, having Luminosity separate can be used to help detect signs better at night because the signs will have a larger luminosity at night than the rest of the image.
+
+
+Using Otsu thresholding, the authors transformed the L*a*b image into a binary image. A total of four binary images are generated by bisecting the positive and negative part of the a and b channels. Symmetry detection is then performed on the images to find the ROIs where the signs might be. The total ROI is defined by the union of each individual ROI of the four images. The authors optimized this method for detecting circles, but the method can still detect all other shapes. The tracking algorithm used was designed to minimize the computational effort. How this is done, is that once a sign is detected in one frame, that information is then used in the next frame. By knowing where the sign was in the previous frame, the algorithm does not have to examine the entire image, but only a small section where the sign is believed to be.
+
+
+There is a problem with this method though, there is the possibility that a sign is detected in one frame, but is then lost for a few frames and then is detected again. This cause an increase in computation time and is considered tracking failure. How the authors overcame this, is that for a small cost, an efficient parallel process is used to choose more than just one radii in the detection process and because of this, if the sign is lost for a radii of 10 pixels, it can be detected in the radii of 20 pixels. It was determined that using single frames for detection and recognition produced poor recognition rates. However, using the authors proposed system, they were able to achieve a detection rate of 95.3% and a classification rate of 81.2%. While the system still has some faults, it performed very well.
+
+
+[4] G. K. Siogkas and E. S. Dermatas, “Detection, Tracking and Classification of Road Signs in Adverse Conditions,” in MELECON 2006 - 2006 IEEE Mediterranean Electrotechnical Conference, 2006, pp. 537–540.
+
+
+
+
+________________
+
+
+ICDAR 2015 Competition on Robust Reading
+By: Karatzas et al.
+Summary:
+
+
+
+
+
+
+[5] D. Karatzas, L. Gomez-Bigorda, A. Nicolaou, S. Ghosh, A. Bagdanov, M. Iwamura, J. Matas, L. Neumann, V. R. Chandrasekhar, S. Lu, F. Shafait, S. Uchida, and E. Valveny, “ICDAR 2015 competition on Robust Reading,” in 2015 13th International Conference on Document Analysis and Recognition (ICDAR), 2015, pp. 1156–1160.
+
+
+________________
+
+
+An Active Vision System for Real-Time Traffic Sign Recognition
+By: Miura et al.
+Summary:
+
+
+This paper by Miura et al presents an active vision system for real time traffic sign recognition. The paper starts by talking about how signs are made to be easily detected, at least for humans. Traffic signs have a different color than the natural background, but color information is sensitive to lighting effects and can cause many problems. Therefore the shape of the sign is also taken into consideration. This would normally be enough, but with signs in urban and city areas where there are a lot of other signs and structures with shapes and colors similar to that of traffic signs are harder to detect. .
+
+
+The system that the authors discuss is a system that has two cameras. One camera has a wide angle lense that is used for sign detection. The images from this camera is what is used to determine where a sign is and where to point the other camera. The second camera has a tele-lense to get close up pictures of the detected sign. The second camera is switched to once a sign has been detected with the first camera, so both cameras are not operating at the same time. The close up images from the second camera with the tele-lense are used for the recognition process. Finally, these images are fed into a computer with an image processing board.
+
+
+Again, the camera with the wide angle lense is used for detecting traffic signs. The authors go about detecting road signs by first segmenting the image by color. The speed signs the authors were looking at had red boards, so they tried to use color extraction based on the color red. However, they found that red has low intensity information and often produced unreliable results. Therefore the authors used color extraction based on white whitch the speed signs had a lot of. Using a threshold, the authors were able to extract possible traffic sign candidates. The next step was to determine if these candidates are indeed traffic signs.
+
+
+To do this, the authors found the shape of the pixels using edge information. The technique the authors used was using the assumption that if the sign was a circle, then the center of the circle should lie on a line that passes through the edges of the circle with the same gradient as the edge. As in the line passes through the edge perpendicularly. If the sign is truly a circle, then a peak will form where the center of the circle lies. For rectangular shaped signs, the authors detected horizontal and vertical edges and projected them to the x and y axis. There will be two peaks on each projection if the sign is rectangular.
+
+
+Once a sign is detected by the wide angle lense camera, the system needs to switch to the tele-lense camera. The problem is that this takes time and since the vehicle is moving, the sign will not be in the same spot. To counter this, the authors implemented a tracking algorithm so that the system can estimate where the sign will be once the system has switched to the tele-lense camera. The authors made two assumption to help estimate sign position. These assumptions are that the vehicle is moving at a constant speed and moving in a straight line. With these two assumptions, a detected traffic sign will follow a line that passing the focus of expansion (FOE), therefore, the system only has to predict the sign somewhere along that line which simplifies the problem a lot. 
+
+
+To make this prediction, the authors created a system of equations and then solved for them. What they found is that the system does not actually need vehicle speed or camera focal length to estimate position. Using their equations the authors were able to roughly estimate the new position on the detected traffic sign, so that once the system switched to the tele-lense camera, the camera can point to the correct location. To account for some error, the authors had the system take multiple pictures with the tele-lense camera until the sign filled up most of the image.
+
+
+The last step in the system was to identify the sign. The authors did this with normalized correlation-based pattern matching using a database. By using normalized correlation, the system becomes more robust to lighting conditions. The authors use two thresholds during the matching process and the pattern that performed the best for both would be considered the best candidate. Similarly, the authors also extracted text of road signs by assuming that the characters would be along a horizontal line and would be smaller than the sign symbols. The characters were then matched using the same pattern matching method.
+
+
+One of the major drawbacks to the system is that the authors only used a global threshold for each image. By only having one threshold, typically only one sign was detected. This means that if an image contained multiple traffic signs, only one of them would be detected and processed. This possibly could be solved by using adaptive thresholding which will allow different thresholds for different areas of the image. However, this will also slow down the overall process and could make the system too slow for real time.
+
+
+The authors results were a little skeptical. They perform the experiment on 17 information signs and had a 100% detection and 100% character recognition. They also examined 71 speed signs and had a detection rate of 97.2% but only identified 46.5% of them. The reason I am skeptical is that the results for the information signs is too good, which tells me that the images used were really clean and/or they did not use enough signs to get a good representation. The speed sign results make sense though. Some final thoughts is that, with modern cameras, I do not think there is a need for a system with 2 cameras and that the system only focused on two different signs which in reality there are a lot more.
+
+
+[6] J. Miura, T. Kanda, and Y. Shirai, “An active vision system for real-time traffic sign recognition,” in ITSC2000. 2000 IEEE Intelligent Transportation Systems. Proceedings (Cat. No.00TH8493), 2000, pp. 52–57.
+
+
+
+
+________________
+
+
+A System for Traffic Sign Detection, Tracking, and Recognition Using Color, Shape, and Motion Information
+By: Bahlmann
+Summary:
+
+
+The paper by Bahlmann describes a robust, real time traffic sign detection, tracking, and recognition. The authors created the system to focus on a small subset of signs that the author felt were the most important. These signs were speed signs, no-passing signs and their corresponding end-signs. The challenges that face such a system are the unstructured environment that the video is taken in and the hardware used. The environment is a big challenge because the lighting can vary significantly, abrupt contrast changes, and also the degradation of the sign material and color. Depending on the hardware, the challenge falls on the computer for real time computation while also having a camera that can record clear images with minimal distortions and motion blur.
+
+
+The proposed system is a combination of a detection and tracking framework, based on AdaBoost, color sensitive Haar wavelet features, and temporal information propagation; as well as a Bayesian classification with temporal hypothesis. The first step in the system is to detect the traffic signs. To perform detection the author used Adaboost detection and tracking with joint color and shape modeling. The author uses a filter that describes an overcomplete Haar wavelet and masks it with the image pixels to determine if the area is an object or a non-object. The thresholds used to classify an area is an object or a non-object are created from using the AdaBoost training algorithm.
+
+
+Typically the Haar wavelets are used on grayscale images, but color is a very important source of information when it comes to traffic signs. Therefore the author decided to look at a few color representations to see which gave the best results. The first representation is the standard RGB channels. The next representation is using the normalized RGB channels and the final representation is using grayscale. After training and testing, the author found that the best representation was the normalized red channel r and the standard R and G channels. The combination of these representation work very well at detecting the red ring around the speed signs. After the traffic signs are detected, the signs are then tracked using a simple motion model and temporal information propagation.
+
+
+To help with classification, the images are then normalized once the traffic signs are detected. This is done by extracting a circular patch where the sign was detected. Then the image is converted to grayscale. Finally the grayscale patch is scaled to a normalized resolution to match the classifiers. For the classification step, the authors used unimodal Gaussian probability densities. The author used a maximum likelihood approach to make the classification decision. The author also stated that the results from the maximum likelihood approach could be further improved by incorporating temporal information from previous frames. Which is why the author is using a tracking algorithm. 
+
+
+The system was tested on 30 minutes of video that had different weather conditions and the signs typically appeared to be anywhere from 10-55 pixels. The resulting system had a detection evaluation where the systems had a 1.4% false negative rate and a 0.03% false positive rate. The system’s classification error rate was about 6%. The author pointed out that most of the misclassification occurred between like signs such as a 60 km and a 80 km sign.
+
+
+
+
+[7] C. Bahlmann, Y. Zhu, M. Pellkofer, and T. Koehler, “A system for traffic sign detection, tracking, and recognition using color, shape, and motion information,” in IEEE Proceedings. Intelligent Vehicles Symposium, 2005., 2005, pp. 255–260.
+
+
+________________
+
+
+Road-Sign Detection and Tracking
+By: Chiung-Yao Fang
+Summary:
+
+
+The paper by Fang presents a visual driver-assistance system to detect, track, and recognize road signs in both natural and city environments. Road signs are designed for the human to easy detect and recognize so that they can perform the necessary actions required to operate the vehicle safely. However, due to weather, occlusions, and distractions, the driver can easily miss these important signs such as a stop sign which can cause severe accidents. Which is why a driving-assistance system for road sign detection and recognition is so important.
+
+
+There have been many different methods developed to perform road sign detection and recognition. The first approach for identifying road signs, by Lalonde and Li, was a color indexing method. All models of road signs were first described in terms of color histograms which created a small database. When a sign is extracted from a single image, the sign is also described as a color histograms; the histogram of the extracted sign is then compared to those in the database. The closest match is considered to be the identified sign. However, this method fails to account for the shapes of signs and color based identification can be very sensitive to changes in lighting.
+
+
+The next method combined both color and shapes to identify road signs. The method is by Escalera and Moreno and it starts by using color segmentation based on red and blue. Then specific angles were considered such as 60 and 90 degrees as they are common for signs. However, as the number of signs increased, the computation cost increased greatly which is a problem for real time sign identification in a city. One of the last methods presented in this paper is by Piccioli et al. This method also incorporated color and shape information and stated that if temporal information is included, the performance could be increased even further. The authors agree with this conclusion.
+
+
+Some assumptions can be made based on how the video equipped car is moving along the roads. For example, a sign will continually grow in size as the vehicle approaches the sign, until the sign moves outside the capture area. Using this assumption, the authors adapted a detection system that is sensitive to a particular image size by ignoring objects that are less than a given pixel diameter. Once a road sign is detected, a Kalman filter is used to predict the position of the sign in succeeding frames to reduce the area that needs to be processed. 
+
+
+The first step of the system is to capture a RGB image using a camera. The image is then converted from RGB to HSI where the hue channel is used to form a new image H. A two-layered neural network is then used to extract the centers of the color regions in parallel. As in, the neural network will detect color blobs and determine the center of each of those blobs and return those centers to the system. At the same time as the color extraction neural networks, there is a second neural network using an edge-detection method on the same color regions. The edge-detection method is used to find symmetrical shapes in the image which would be strong candidates for road signs.
+
+
+Once the two neural networks finish finding color and shape centers, the resulting centers from the two networks are integrated together using a fuzzy approach to create an integration map. The map is used in conjunction with a threshold to determine the best road sign candidates. After a brief verification step to make sure candidates are road signs, the positions and sizes of the candidates are outputted to the tracking part of the system. The system will then track these objects until they are large enough to determine the type of sign that they are or if they are a sign at all.
+
+
+The color neural network uses a color feature extraction method based on the HSI color space. The reason the authors used the HSI color space is because most of the sign images were taken out in a natural environment at various times of the day which changes the lighting effect on the signs. The color detect of the sign is the original color of the sign plus the environmental lighting and since the environmental lighting is always changing, the authors decided that the HSI color space  would be better than the RGB color space since RGB is very sensitive to lighting changes. The color extraction neural network was trained to look for just a few colors that are common for signs and the number of neurons is the number of pixels in the image. 
+
+
+The authors created a weighting function presented in the paper that weighs pixels based on the pixel’s hue and the overall shape the same color pixels make. If the color of a pixel was the same or similar to that of a road sign, the output pixel would receive a larger weight. If enough pixels of the same color form a symmetrical shape, the weighting function will give the pixels more weight, and if the pixels represent a road sign, a neuron on the output layer will “fire”. This neuron represents the center of a sign candidate in the current image. Each shape uses its own weighting function, that way, random blobs of color are not weighted high and therefore, will not be considered. 
+
+
+A similar process is performed by a second neural network, but instead of pixel hue values, this network uses edge detection and the gradients at the edge pixels. The reason for also having a sign detector based on shape is that the shape of a road sign does not change due to lighting or weather, therefore shape is a strong indicator in conjunction with color to determine a sign. Also, the neural network does not need to examine all the edges in the image. An edge detector (such as Sobel) would be used to find all edges in the images and then an edge would only be processed by the neural network if it is a color of a sign. That means if the edge is purple, which is not a standard sign color, that edge would be ignored. Using a weight function, as the edges are processed, each edge neuron will be weighted either more positively if it is the right color and shape, or negatively if not. At the end, the neuron with the largest weight, represents a center of a shape in the image.
+
+
+As stated earlier, the results from the two neural networks are integrated together and if any of the centers returned are actually signs, the value of their member function will be very large. Before the authors verified if a detected object is a sign, they would track the object first until it became close enough for the system to capture clearly. The authors went about this path because if a sign is detected far away towards the vanishing point, the resolution of the sign would be too small and the identification of the sign could be wrong. However, if you wait till the sign is close, the results are much more consistent and accurate. Also, this reduces the amount of computation required trying to verify an object is indeed a sign. 
+
+
+The tracking algorithm uses a Kalman filter to predict where the sign will be in the next frame. The authors have an equation to predict both size and position and these are used by the Kalman filter for the initial values. The Kalman filter then uses two sets of equation to perform time update and measurement update. The first, known as “predictor” equations, estimates the succeeding state and error covariance. The second, “corrector” equations, computes the Kalman gain and corrects the state and error covariance. The results from the Kalman filter are then used in the verification step. The reason for the verification step is, despite using two neural networks and integrating the results, false road signs will still be detected and they need to be removed from the candidate list. The verification step occurs after tracking, and is performed only when the object is big enough to be recognized. The authors used a threshold of a 10 pixel diameter. Once the candidate is 10 pixels or more in diameter, the verification step is used. If the candidate is a sign, then the recognition step is performed which is not discussed in this paper.
+
+
+The verification step uses a couple of rules to determine if a candidate is a sign. The first rule is the area proportions of various colors within the same road sign are fixed. The second rule is the all road signs are symmetric about the vertical axis. If the candidate passes these two rules, it is considered a sign and will move to the recognition step. The authors first ran the system using images of 320x240 with 0.2 seconds between frames. The authors results show that this is still too much information and was not able to perform fast enough to be real-time. The authors determine that the system was spending too much time tracking all the objects on a given frame. Therefore, the authors reduced the image size to 80x60 pixels. The system performance was close to what the authors wanted. One thing to note is that the authors state that parallelizing the code would increase performance even more. This is not the first paper to state this fact.
+
+
+[8] Chiung-Yao Fang, Sei-Wang Chen, and Chiou-Shann Fuh, “Road-sign detection and tracking,” IEEE Trans. Veh. Technol., vol. 52, no. 5, pp. 1329–1341, Sep. 2003.
