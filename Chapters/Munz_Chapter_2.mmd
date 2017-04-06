@@ -1,14 +1,51 @@
 ## Litterature Review
 
-How everything fits together
+The high level process flow for road sign detection and recognition is...
+**(TODO)**: Finish intro paragraph for litt review.
 
-What everyone else has done?
+* How everything fits together
 
-### Multiple Cameras [Miura]
+* What everyone else has done?
+
+### An Overview of the Detection and Recognition Process
+
+* Take image
+* Preprocess it
+* Use color thresholding
+* Use object localization
+* Verify that it is a road sign
+* Reduce image to sign area
+* Match sign to database
+
+### Capturing the Image
+
+There are many different ways to capture an image...
+
+
+#### Multiple Cameras [Miura]
 
 One multiple camera method was by Miura et al. in the paper An Active Vision System for Real-Time Traffic Sign Recognition. In this paper the authors describe a system that uses two cameras with different focal lenses to perform different segmentation tasks. [Miura]
 **(TODO)**: Add more about the system in the Miura paper.
 
 
+### Preprocessing
 
-### Color and Shape Segmentation
+Some Authors performed process on an image after it was captured but before the segmentation and detection algorithms were performed on the image.
+
+### Segmentation and Detection
+
+Color and shape segmentation can be accomplished by using many different methods...
+
+#### Neural Networks [Fang]
+
+The author Chiung-Yao Fang uses multiple neural networks to perform color and shape segmentation.
+
+
+### Verification
+
+Many Authors used various verification methods to determine if the region of interest that the segmentation and or detection pass along is truley a road sign or not.
+
+
+### Recognition
+
+The final step is to classify the region of interests or to recognize it as a specfic sign.
